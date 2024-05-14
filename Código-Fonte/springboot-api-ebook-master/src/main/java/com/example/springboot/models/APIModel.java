@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 
 import org.springframework.hateoas.RepresentationModel;
 
-
+//Código dos dados que são recebidos pelos métodos CRUD 
 @Entity
 @Table(name = "TB_API")
 public class APIModel extends RepresentationModel<APIModel> implements Serializable{

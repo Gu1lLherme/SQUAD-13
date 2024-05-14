@@ -18,12 +18,14 @@ import java.util.UUID;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+//Código dos métodos CRUD para o banco de dados
 @RestController
 public class APIController {
 	
 	@Autowired
 	APIRepository productRepository;
 	
+	//Método GET
 	@GetMapping("/APIs")
 	public ResponseEntity<List<APIModel>> getAllProducts(){
 		List<APIModel> productsList = productRepository.findAll();
@@ -36,6 +38,7 @@ public class APIController {
 		return ResponseEntity.status(HttpStatus.OK).body(productsList);
 	}
 
+	//Método GET com ID
 	@GetMapping("/APIs/{id}")
 	public ResponseEntity<Object> getOneProduct(@PathVariable(value="id") UUID id){
 		Optional<APIModel> productO = productRepository.findById(id);
@@ -46,6 +49,7 @@ public class APIController {
 		return ResponseEntity.status(HttpStatus.OK).body(productO.get());
 	}
 	
+	//Método POST
 	@PostMapping("/APIs")
 	public ResponseEntity<APIModel> saveProduct(@RequestBody @Valid APIRecordDto productRecordDto) {
 		var productModel = new APIModel();
@@ -53,6 +57,7 @@ public class APIController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(productRepository.save(productModel));
 	}
 	
+	//Método DELETE
 	@DeleteMapping("/APIs/{id}")
 	public ResponseEntity<Object> deleteProduct(@PathVariable(value="id") UUID id) {
 		Optional<APIModel> productO = productRepository.findById(id);
@@ -63,6 +68,7 @@ public class APIController {
 		return ResponseEntity.status(HttpStatus.OK).body("Product deleted successfully.");
 	}
 	
+	//Método POST
 	@PutMapping("/APIs/{id}")
 	public ResponseEntity<Object> updateProduct(@PathVariable(value="id") UUID id,
 													  @RequestBody @Valid APIRecordDto productRecordDto) {
