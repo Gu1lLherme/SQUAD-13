@@ -65,3 +65,25 @@ public class ProductModel implements Serializable {
         this.endpoint = endpoint;
     }
 }
+
+public class LoginRequest {
+    private String username;
+    private String password;
+
+    public String getUsername() {
+        return Username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String passwprd) {
+        this.username = username;
+    }
+}
+
