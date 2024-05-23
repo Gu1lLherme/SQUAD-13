@@ -1,30 +1,31 @@
-package com.cencosud.api_banckend_cencosud.services;
+package com.cencosud.api_banckend_cencosud.service;
 
-import org.springframework.security.core.userdetails.User;
+import com.cencosud.api_banckend_cencosud.Util.JwtUtil;
+import io.jsonwebtoken.Claims;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Service
-public class UserService implements UserDetailsService {
+public class JwtService {
 
-    private Map<String, String> users = new HashMap<>();
+    @Autowired
+    private JwtUtil jwtUtil;
 
-    public UserService() {
-        users.put("user1", "password1");
-        users.put("user2", "password2");
+    public String generateToken(UserDetails userDetails) {
+        return jwtUtil.generateToken(userDetails.getUsername());
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        String password = users.get(username);
-        if (password == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        return new User(username, password, new ArrayList<>());
+    public Claims validateToken(String token) {
+        return jwtUtil.validateToken(token);
+    }
+
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        String username = jwtUtil.validateToken(token).getSubject();
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    private boolean isTokenExpired(String token) {
+        return jwtUtil.validateToken(token).getExpiration().before(new Date());
     }
 }
