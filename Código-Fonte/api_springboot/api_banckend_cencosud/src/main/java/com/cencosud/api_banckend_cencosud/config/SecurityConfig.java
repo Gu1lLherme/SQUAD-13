@@ -1,6 +1,6 @@
-package com.cencosud.api_banckend_cencosud.security;
+package com.cencosud.api_banckend_cencosud.config;
 
-import com.cencosud.api_banckend_cencosud.filter.JwtRequestFilter;
+import com.example.cencosud.api_banckend_cencosud.security.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

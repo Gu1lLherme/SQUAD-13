@@ -12,7 +12,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Carregar usuário do banco de dados ou outro serviço
+        // Para fins de exemplo, retornando um usuário fixo
         return new org.springframework.security.core.userdetails.User(
                 "user",
                 "{noop}password",
@@ -20,3 +20,4 @@ public class MyUserDetailsService implements UserDetailsService {
         );
     }
 }
+
