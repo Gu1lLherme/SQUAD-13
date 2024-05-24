@@ -1,6 +1,3 @@
-# SQUAD-13
-Projeto da disciplina de Residência em Software II.
-
 1°:
 Acesse o src/main/resources/application.properties e insira a url, username e password do banco de dados a ser utilizado.
 
